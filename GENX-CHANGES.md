@@ -40,7 +40,8 @@ registers, and resets it to `0xff` with them.
 **Why.** The emulator reads and writes `via_t2ll` but never declares it. Writing
 it first quietly creates a global; *reading* it first throws
 `ReferenceError: via_t2ll is not defined` and stops the machine. Most programs
-never notice. Frogger reads the latch before anything writes it, and crashed on
+never notice. Frog (P.J. Fellner's frog-crossing game, which GenX-DOS once
+listed as Frogger) reads the latch before anything writes it, and crashed on
 load. Thomas's current code still has no declaration.
 
 ## Change 1b — reset `via_t1_undf`, not `var_t1_undf`
