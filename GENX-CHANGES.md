@@ -176,8 +176,8 @@ because it works from the character typed.
 **Files:** `petkeys.js`, `pet2001video.js`. **GenX-DOS only** — these are our
 choices, not improvements, and are not for upstream.
 
-- **Green screen.** The video's foreground colour is `#60d0a0`, a green phosphor,
-  in place of Thomas's white `#effeff`.
+- **Green screen.** The video's foreground colour is pure green, `#00ff00`, in
+  place of Thomas's white `#effeff`.
 - **Keyboard picture at 600 pixels.** The click handlers for the on-screen
   keyboard picture scale their hit areas by 0.75, for the picture drawn 600 pixels
   wide instead of 800. GenX-DOS does not currently show that picture, so this has
