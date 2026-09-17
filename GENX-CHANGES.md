@@ -12,7 +12,7 @@ Apple II, the Sudoku solver, the site's pages — is Thomas's and is untouched.
 
 ## Branches
 
-- **`main`** — Thomas's repository as forked, unchanged.
+- **`master`** — Thomas's repository as forked, unchanged.
 - **`genx`** — what GenX-DOS ships. It starts from upstream commit `55d18e4`
   (17 March 2021), because that is the version GenX-DOS copied in June 2026: six
   of its nine files are byte-identical to that commit. Thomas has improved the
