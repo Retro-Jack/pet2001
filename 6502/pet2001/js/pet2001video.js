@@ -42,7 +42,7 @@ function Pet2001Video(context) {
         ctx.fillRect(col * 16, row * 16, 16, 16);
 
         // Color for "white" pixels
-        ctx.fillStyle = "#effeff";
+        ctx.fillStyle = "#60d0a0";
 
         for (var y = 0; y < 8; y++) {
             var bits = charset[(d8 & 0x7f) * 8 + y];

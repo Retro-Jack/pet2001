@@ -105,10 +105,10 @@ function petkeyOnMouseDown(img, event) {
     x -= img.offsetLeft;
     y -= img.offsetTop;
 
-    if (((x >= 13 && x < 547) || (x >= 594 && x < 788)) &&
-        (y >= 13 && y < 257)) {
-        var col = Math.floor((x - 13) / 48.5);
-        var row = Math.floor((y - 13) / 48.5);
+    if (((x >= (13*0.75) && x < (547*0.75)) || (x >= (594*0.75) && x < (788*0.75))) &&
+        (y >= (13*0.75) && y < (257*0.75))) {
+        var col = Math.floor((x - (13*0.75)) / (48.5*0.75));
+        var row = Math.floor((y - (13*0.75)) / (48.5*0.75));
         petKeypress(col, row, event.shiftKey);
     }
 }
@@ -125,10 +125,10 @@ document.addEventListener('touchstart', function (event) {
     var y = touch.pageY - petkey.offsetTop;
     // console.log("onTouchStart() called! x=%d y=%d", x, y);
 
-    if (((x >= 13 && x < 547) || (x >= 594 && x < 788)) &&
-        (y >= 13 && y < 257)) {
-        col = Math.floor((x - 13) / 48.5);
-        row = Math.floor((y - 13) / 48.5);
+    if (((x >= (13*0.75) && x < (547*0.75)) || (x >= (594*0.75) && x < (788*0.75))) &&
+        (y >= (13*0.75) && y < (257*0.75))) {
+        col = Math.floor((x - (13*0.75)) / (48.5*0.75));
+        row = Math.floor((y - (13*0.75)) / (48.5*0.75));
         petKeypress(col, row, false);
     }
 }, false);
@@ -150,10 +150,10 @@ document.addEventListener('touchend', function (event) {
     var y = touch.pageY - petkey.offsetTop;
     //console.log("onTouchEnd() called! x=%d y=%d", x, y);
 
-    if (((x >= 13 && x < 547) || (x >= 594 && x < 788)) &&
-        (y >= 13 && y < 257)) {
-        col = Math.floor((x - 13) / 48.5);
-        row = Math.floor((y - 13) / 48.5);
+    if (((x >= (13*0.75) && x < (547*0.75)) || (x >= (594*0.75) && x < (788*0.75))) &&
+        (y >= (13*0.75) && y < (257*0.75))) {
+        col = Math.floor((x - (13*0.75)) / (48.5*0.75));
+        row = Math.floor((y - (13*0.75)) / (48.5*0.75));
         petKeyrelease(col, row, false);
     }
 }, false);
