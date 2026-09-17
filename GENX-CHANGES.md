@@ -77,6 +77,25 @@ same name (the `blankTimeoutFunc` members on the emulator objects are properties
 which a bare name never reaches), so each wrapper calls exactly what the string
 did.
 
+## Change 4 — a choice of character ROM for text mode
+
+**Files:** `pet2001roms.js`, `pet2001video.js`, `pet2001.js`. **Partly upstream,
+partly ours** — the character data is Thomas's; the per-program switch is ours.
+
+**What.** Adds the later character ROM's lower/upper case set (`petCharRom3`,
+taken from Thomas's own `petCharRom2b`, January 2023) and a
+`setNewCharRom(flag)` method on the emulator to choose it. Nothing changes
+unless a page calls it.
+
+**Why.** The original PET 2001 character ROM and the one fitted from the
+2001-N and 3000 series on show the case of letters the other way round in text
+mode — graphics mode is identical in both. A program shows its text as intended
+only on the ROM it was written for: GenX-DOS's *Adventureland* (modified in May
+1979) needs the original, while *Crazy Balloon*'s instruction screens appeared
+as `mOVE THE SWAYING BALLOON TO THE gOAL`. Thomas ties the later ROM to BASIC 4;
+GenX-DOS runs every program on BASIC 2, so it needs the choice per program
+instead.
+
 ## Change 3 — GenX-DOS presentation
 
 **Files:** `petkeys.js`, `pet2001video.js`. **GenX-DOS only** — these are our
