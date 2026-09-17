@@ -96,6 +96,31 @@ as `mOVE THE SWAYING BALLOON TO THE gOAL`. Thomas ties the later ROM to BASIC 4;
 GenX-DOS runs every program on BASIC 2, so it needs the choice per program
 instead.
 
+## Change 5 — held keys, and SHIFT on its own
+
+**File:** `6502/pet2001/js/petkeys.js`. **General** — nothing changes unless a
+page asks for it.
+
+**What.** A held-key mode, turned on with `petkeySetHeldMode(true)` and fed by
+a new `petkeyOnKeyUp` handler. While it is on, a key on the host keyboard stays
+pressed on the PET for exactly as long as it is held, and either Shift key
+presses the PET's SHIFT on its own. Keys are matched by physical position
+(`event.code`), so holding Shift does not change which PET key a digit or
+letter lands on. Auto-repeat is ignored, a key shared by two host keys (the
+top-row and keypad `8`) is only let go when both are up, and everything is
+released if the window loses focus. Typing through the command queue works as
+before in either mode.
+
+**Why.** The emulator presses each typed key for 50 ms and lets it go. That
+suits typing, but a game that looks at the keyboard only now and then misses
+the press — GenX-DOS's *Frog* ignored quick taps — and nothing can be held
+down. And a SHIFT key could only be pressed together with another key, while
+many PET games (*Space!*, *Aliens!*, *Space Ace*) fire with SHIFT alone.
+
+The idea of a held-key "game" mode came from the PET emulator at
+[commodoregames.net](https://www.commodoregames.net/), which offers one. This
+implementation is written independently for this fork.
+
 ## Change 3 — GenX-DOS presentation
 
 **Files:** `petkeys.js`, `pet2001video.js`. **GenX-DOS only** — these are our
