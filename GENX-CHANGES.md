@@ -32,7 +32,7 @@ The GenX-DOS bundle takes these files from `genx`:
 
 ## Change 1 — declare `via_t2ll`
 
-**File:** `6502/pet2001/js/pet2001io.js`. **General fix** — worth offering upstream.
+**File:** `6502/pet2001/js/pet2001io.js`. **General fix** — offered upstream.
 
 **What.** Declares the VIA's timer 2 latch-low register beside the other VIA
 registers, and resets it to `0xff` with them.
@@ -43,10 +43,20 @@ it first quietly creates a global; *reading* it first throws
 never notice. Frogger reads the latch before anything writes it, and crashed on
 load. Thomas's current code still has no declaration.
 
+## Change 1b — reset `via_t1_undf`, not `var_t1_undf`
+
+**File:** `6502/pet2001/js/pet2001io.js`. **General fix** — offered upstream.
+
+**What.** The VIA reset clears the timer 1 underflow flag under its real name.
+
+**Why.** The reset routine wrote `var_t1_undf = 0`, a typo for `via_t1_undf`. That
+assigned an unused global and left the real flag as it was, while timer 2's flag
+beside it was cleared.
+
 ## Change 2 — timers take functions, not strings
 
 **Files:** `petkeys.js` (two), `pet2001video.js` (one), `pet2001main.js` (two).
-**General fix** — worth offering upstream.
+**General fix** — offered upstream.
 
 **What.** `setTimeout("petkeyKeypressTimeout()", ms)` becomes
 `setTimeout(function () { petkeyKeypressTimeout(); }, ms)`, and likewise for the
@@ -79,6 +89,13 @@ choices, not improvements, and are not for upstream.
   no visible effect; it is kept because it is what the bundle shipped.
 
 ---
+
+## Offered upstream
+
+Changes 1, 1b and 2 were offered to Thomas as
+[skibo/skibo.github.io#1](https://github.com/skibo/skibo.github.io/pull/1),
+rebuilt on his current code (branch `pet-fixes` in this fork). Change 3 is ours
+and stays here.
 
 ## Updating GenX-DOS from this fork
 
