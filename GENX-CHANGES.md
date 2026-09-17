@@ -121,6 +121,56 @@ The idea of a held-key "game" mode came from the PET emulator at
 [commodoregames.net](https://www.commodoregames.net/), which offers one. This
 implementation is written independently for this fork.
 
+## Change 6 — a disk image in drive 8
+
+**Files:** `pet2001ieee.js`, `pet2001io.js`, `pet2001hw.js`, `pet2001.js`.
+**General** — nothing changes unless a page attaches a disk.
+
+**What.** `ieeeLoadDisk(bytes)` attaches a `.d64` disk image (35 or 40 tracks)
+as drive 8. From then on, `LOAD` reads the file it names from the disk's
+directory — `*` and `?` match as they do on a real drive, and a leading `0:` is
+ignored — in place of the one program given to `ieeeLoadData`. Only loading is
+served: there is no directory listing (`LOAD"$",8`), `SAVE` goes where it went
+before, and the disk is never written. A name that matches nothing gets no
+reply, and BASIC 2 then waits, as it would with a real drive, until RUN/STOP is
+pressed (change 7).
+
+**Why.** Drive 8 answered every `LOAD` with the same program whatever it was
+asked for, which is enough to start a one-file game but not one that loads more
+of itself as it runs. *Attack of the PETSCII Robots* (David Murray, 2021) loads
+its tile set and each map by name, and is distributed as a `.d64`.
+
+The PET emulator at [commodoregames.net](https://www.commodoregames.net/) showed
+that loading from disk images is practical in a browser. This reader is written
+independently for this fork from the published `.d64` layout.
+
+## Change 7 — Escape is RUN/STOP
+
+**File:** `petkeys.js`. **General.**
+
+**What.** The Escape key presses the PET's RUN/STOP key, both when typing and in
+held-key mode. The key tables gain RUN/STOP as code 3, the character the PET
+itself returns for it.
+
+**Why.** No host key reached RUN/STOP, so a BASIC program could not be broken
+into, a load could not be abandoned, and games that pause on RUN/STOP (*Attack
+of the PETSCII Robots*) could not be paused. Escape is RUN/STOP in VICE, the
+Commodore emulator most people know.
+
+## Change 8 — Shift with comma and full stop gives < and >
+
+**File:** `petkeys.js`. **General** — held-key mode only.
+
+**What.** In held-key mode, Shift with the host's comma or full stop key presses
+the PET's own `<` or `>` key, and lets the PET's SHIFT go for as long as that key
+is held.
+
+**Why.** Held-key mode matches keys by position and turns a host Shift into the
+PET's SHIFT, so Shift+comma arrived as SHIFT+`,` — a graphics character — and
+the PET's `<` and `>` keys could not be reached at all. *Attack of the PETSCII
+Robots* switches weapons and items with them. Typing mode was already right,
+because it works from the character typed.
+
 ## Change 3 — GenX-DOS presentation
 
 **Files:** `petkeys.js`, `pet2001video.js`. **GenX-DOS only** — these are our
